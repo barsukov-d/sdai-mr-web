@@ -2,5 +2,5 @@
 <body><h1>Список записей</h1><ol class="items" id="list"></ol>
 <script>function renderList(xs){return xs.map(x=>"<li>"+x.title+" — "+x.price+" ₽</li>").join("")}
 fetch("/api/items").then(r=>r.json()).then(xs=>{document.getElementById("list").innerHTML=renderList(xs)})</script>
-<footer>Соседний подвал</footer>
+<footer>Серия М</footer>
 </body></html>
