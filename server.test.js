@@ -12,7 +12,7 @@ test("GET /health answers 200 ok", async (t) => {
   await new Promise((resolve, reject) => { child.stdout.on("data", (d) => { if (String(d).includes("web on")) resolve() }); child.on("exit", (c) => reject(new Error("server exited " + c))) })
   const r = await fetch(`http://localhost:${port}/health`)
   assert.strictEqual(r.status, 200)
-  assert.strictEqual(await r.text(), "ok")
+  assert.strictEqual(await r.text(), "alive")
 })
 const startWeb = async (t, env) => {
   const port = await freePort()
