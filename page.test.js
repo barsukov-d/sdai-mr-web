@@ -11,4 +11,4 @@ test("list shows «название — цена ₽»", () => {
   assert.ok(out.includes("Первая запись — 100 ₽"))
   assert.ok(out.includes("Вторая запись — 250 ₽"))
 })
-test("page lists items in an ordered list", () => { assert.match(readFileSync(new URL("./index.html", import.meta.url), "utf8"), /<ol id="list">/) })
+test("page lists items in an ordered list", () => { assert.match(readFileSync(new URL("./index.html", import.meta.url), "utf8"), /<ol[^>]*id="list"/) })
