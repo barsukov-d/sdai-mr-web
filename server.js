@@ -9,5 +9,17 @@ http.createServer(async (req, res) => {
     catch { res.statusCode = 502; res.end("[]") }
     return
   }
+  if (req.method === "GET" && req.url === "/version") {
+    try {
+      if (!process.env.API_URL) throw new Error("API_URL is not set")
+      const r = await fetch(process.env.API_URL + "/api/version", { signal: AbortSignal.timeout(5000) })
+      const body = Buffer.from(await r.arrayBuffer())
+      res.statusCode = r.status
+      const type = r.headers.get("content-type")
+      if (type) res.setHeader("Content-Type", type)
+      res.end(body)
+    } catch { res.statusCode = 502; res.end("bad gateway") }
+    return
+  }
   res.setHeader("Content-Type", "text/html; charset=utf-8"); res.end(readFileSync(new URL("./index.html", import.meta.url)))
 }).listen(port, () => console.log(`web on ${port}`))
